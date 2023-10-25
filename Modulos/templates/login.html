@@ -17,8 +17,8 @@
 		<form class="login-form" method="post" action="{% url 'login' %}">
 			
 			{% csrf_token %}
-			<input type="text" name='cuenta' placeholder="Numero de cuenta"/>
-			<input type="password" name='contra' placeholder="Contraseña"/>
+			<input type="number" name='cuenta' placeholder="Numero de cuenta" required/>
+			<input type="password" name='contra' placeholder="Contraseña" required/>
 			<br></br>
 			<button style="width: 45%; float: left;">Entrar</button>
             <a style="width: 45%; float: right; color:white" href="{% url 'registro' %}">Registrarse</a>
@@ -35,6 +35,7 @@
 
 <div class="acerca_de">
     <h1>Acerca de</h1>
+    <p>Esta es una pagina diseñada de alumnos para alumnos, en ella se encontraran las noticias relevantes de Facultad de Ingenieria Mochis.</p>
 </div>
 
 {% endblock %}

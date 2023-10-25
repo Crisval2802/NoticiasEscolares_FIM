@@ -8,24 +8,25 @@
 
     <center><div class="form">
 
-
+        <h1>Registro de Usuario</h1>
+        <br>
 		<form class="register-form" method="post" action="{% url 'login' %}">
 			
             <h3>Tipo de usuario</h3>
-            <input type="radio" id="lector" name="tipo_usuario" value="Lector">
+            <input type="radio" id="lector" name="tipo_usuario" value="Lector" checked/>
                 <label for="lector">Lector</label><br>
-            <input type="radio" id="escritor" name="tipo_usuario" value="Escritor">
+            <input type="radio" id="escritor" name="tipo_usuario" value="Escritor"/>
                 <label for="escritor">Escritor</label><br>
 
 
             
 			{% csrf_token %}
-			<input type="text" name='cuenta' placeholder="Numero de cuenta"/>
-			<input type="text" name='nombre' placeholder="Nombres(s)"/>
-            <input type="text" name='apellido' placeholder="Apellido(s)"/>
-            <input type="text" name='correo' placeholder="Correo"/>
-            <input type="password" name='contra' placeholder="Contraseña"/>
-            <input type="password" name='confirmar_contra' placeholder="Confirmar Contraseña"/>
+			<input type="number" name='cuenta' placeholder="Numero de cuenta" required/>
+			<input type="text" name='nombre' placeholder="Nombres(s)" required/>
+            <input type="text" name='apellido' placeholder="Apellido(s)" required/>
+            <input type="email" name='correo' placeholder="Correo" required/>
+            <input type="password" name='contra' placeholder="Contraseña" required/>
+            <input type="password" name='confirmar_contra' placeholder="Confirmar Contraseña" required/>
 
 			<br></br>
 
