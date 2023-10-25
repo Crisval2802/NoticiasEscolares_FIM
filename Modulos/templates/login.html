@@ -1,6 +1,7 @@
-
+{% extends 'layouts/nav_inicio.html' %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 <div class="login-page">
 
     <div class="foto_uas">
@@ -19,8 +20,8 @@
 			<input type="text" name='cuenta' placeholder="Numero de cuenta"/>
 			<input type="password" name='contra' placeholder="Contraseña"/>
 			<br></br>
-			<button style="width: 45%; float: left; background-color: #EFB810">Entrar</button>
-            <button style="width: 45%; float: right;">Registrarse</button>
+			<button style="width: 45%; float: left;">Entrar</button>
+            <a style="width: 45%; float: right; color:white" href="{% url 'registro' %}">Registrarse</a>
 		</form>
 
 
@@ -35,3 +36,5 @@
 <div class="acerca_de">
     <h1>Acerca de</h1>
 </div>
+
+{% endblock %}

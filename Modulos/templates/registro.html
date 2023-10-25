@@ -1,0 +1,44 @@
+{% extends 'layouts/nav_inicio.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/registro.css' %}">
+<div class="register-page">
+
+
+
+    <center><div class="form">
+
+
+		<form class="register-form" method="post" action="{% url 'login' %}">
+			
+            <h3>Tipo de usuario</h3>
+            <input type="radio" id="lector" name="tipo_usuario" value="Lector">
+                <label for="lector">Lector</label><br>
+            <input type="radio" id="escritor" name="tipo_usuario" value="Escritor">
+                <label for="escritor">Escritor</label><br>
+
+
+            
+			{% csrf_token %}
+			<input type="text" name='cuenta' placeholder="Numero de cuenta"/>
+			<input type="text" name='nombre' placeholder="Nombres(s)"/>
+            <input type="text" name='apellido' placeholder="Apellido(s)"/>
+            <input type="text" name='correo' placeholder="Correo"/>
+            <input type="password" name='contra' placeholder="Contraseña"/>
+            <input type="password" name='confirmar_contra' placeholder="Confirmar Contraseña"/>
+
+			<br></br>
+
+            <button style="width: 45%; float: right;">Registrarse</button>
+		</form>
+
+
+
+
+    </div></center>
+
+
+
+</div>
+
+{% endblock %}

@@ -1,9 +1,10 @@
 from django.urls import path
 
-from .views import Login
+from .views import Login, Redirigir, Registro
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 
 urlpatterns=[  
    path('login/', Login.as_view(), name='login'),
-
+   path('', Redirigir.as_view(), name='redirigir'),
+   path('registro/', Registro.as_view(), name='registro')
 ]
