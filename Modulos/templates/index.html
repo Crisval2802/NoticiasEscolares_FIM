@@ -1,0 +1,37 @@
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+<div class="login-page">
+
+    <div class="foto_uas">
+        <img src="{% static 'images/imagen_uas.png' %}">
+
+
+    </div>
+
+    <div class="form">
+
+        <strong><h1>Inicio de sesion</h1></strong>
+
+		<form class="login-form" method="post" action="{% url 'login' %}">
+			
+			{% csrf_token %}
+			<input type="text" name='cuenta' placeholder="Numero de cuenta"/>
+			<input type="password" name='contra' placeholder="Contraseña"/>
+			<br></br>
+			<button style="width: 45%; float: left; background-color: #EFB810">Entrar</button>
+            <button style="width: 45%; float: right;">Registrarse</button>
+		</form>
+
+
+
+
+    </div>
+
+
+
+</div>
+
+<div class="acerca_de">
+    <h1>Acerca de</h1>
+</div>
