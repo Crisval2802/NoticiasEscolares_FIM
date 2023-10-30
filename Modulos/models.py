@@ -4,7 +4,9 @@ from django.db import models
 class usuario(models.Model):
     nombre=models.CharField(max_length=100)
     apellido=models.CharField(max_length=100)
-    num_cuenta=models.CharField(max_length=8)
+    correo=models.CharField(max_length=100, default='')
+    tipo=models.CharField(max_length=1, default='L')
+    
 
 class categoria(models.Model):
     nombre=models.CharField(max_length=80)

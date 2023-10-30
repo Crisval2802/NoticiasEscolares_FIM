@@ -10,24 +10,33 @@
 
         <h1>Registro de Usuario</h1>
         <br>
-		<form class="register-form" method="post" action="{% url 'login' %}">
+		<form class="register-form" method="post" action="{% url 'registro' %}">
 			
+            {% if registro %}
+            <div class="alert alert-success" role="alert">
+                {{registro.message}}
+            </div>
+            {% endif %}
+
             <h3>Tipo de usuario</h3>
-            <input type="radio" id="lector" name="tipo_usuario" value="Lector" checked/>
+            <input type="radio" id="lector" name="tipo_usuario" value="L" checked/>
                 <label for="lector">Lector</label><br>
-            <input type="radio" id="escritor" name="tipo_usuario" value="Escritor"/>
+            <input type="radio" id="escritor" name="tipo_usuario" value="E"/>
                 <label for="escritor">Escritor</label><br>
 
 
             
 			{% csrf_token %}
-			<input type="number" name='cuenta' placeholder="Numero de cuenta" required/>
 			<input type="text" name='nombre' placeholder="Nombres(s)" required/>
             <input type="text" name='apellido' placeholder="Apellido(s)" required/>
             <input type="email" name='correo' placeholder="Correo" required/>
             <input type="password" name='contra' placeholder="Contraseña" required/>
             <input type="password" name='confirmar_contra' placeholder="Confirmar Contraseña" required/>
-
+            {% if datos %}
+                <div class="alert alert-danger" role="alert">
+                    {{datos.message}}
+                </div>
+		    {% endif %}
 			<br></br>
 
             <button style="width: 45%; float: right;">Registrarse</button>
