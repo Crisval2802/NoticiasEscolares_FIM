@@ -1,1 +1,15 @@
-<h1>Inicio Lector</h1>
+{% extends 'layouts/nav_principal.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/principal.css' %}">
+
+<div class="noticias">
+    
+    <h1>General</h1>
+
+    
+
+    <p>Esta es una pagina diseñada de alumnos para alumnos, en ella se encontraran las noticias relevantes de Facultad de Ingenieria Mochis.</p>
+</div>
+{% endblock %}

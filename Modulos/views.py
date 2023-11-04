@@ -35,6 +35,11 @@ class Login(View):
         else:
             datos={'message': "Credenciales incorrectas"}
             return render(request, 'login.html' , {"datos":datos})
+        
+class Logout(View):
+    def get(self, request):
+        logout(request)
+        return redirect('login')
     
 class Registro(View):
     def get(self,request):

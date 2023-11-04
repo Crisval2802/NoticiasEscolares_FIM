@@ -1,10 +1,11 @@
 from django.urls import path
 
-from .views import Inicio, Inicio_Escritor, Inicio_Lector, Login, Redirigir, Registro
+from .views import Inicio, Inicio_Escritor, Inicio_Lector, Login, Logout, Redirigir, Registro
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 
 urlpatterns=[  
    path('login/', Login.as_view(), name='login'),
+   path('logout/', Logout.as_view(), name='logout'),
    path('', Redirigir.as_view(), name='redirigir'),
    path('inicio/', Inicio.as_view(), name='inicio'),
    path('registro/', Registro.as_view(), name='registro'),
