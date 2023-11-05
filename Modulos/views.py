@@ -9,7 +9,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth import authenticate, login, logout
 
 
-from .models import usuario
+from .models import usuario, publicacion
 
 
 
@@ -98,7 +98,13 @@ class Inicio_Escritor(View):
         # Validacion de tipo de usuario
         aux_usuario = usuario.objects.get(correo=request.user.email)
         if aux_usuario.tipo=='E':
-            return render(request, 'inicio_escritor.html')
+            publicaciones = list(publicacion.objects.values())
+
+            datos={'publicaciones': publicaciones}
+
+
+
+            return render(request, 'inicio_escritor.html', {"datos":datos})
         else:
             datos={'message': "Error, no tienes acceso a esta ventana"}
             return JsonResponse(datos)
@@ -109,7 +115,14 @@ class Inicio_Lector(View):
         # Validacion de tipo de usuario
         aux_usuario = usuario.objects.get(correo=request.user.email)
         if aux_usuario.tipo=='L':
-            return render(request, 'inicio_lector.html')
+
+            publicaciones = list(publicacion.objects.values())
+
+            datos={'publicaciones': publicaciones}
+
+
+
+            return render(request, 'inicio_lector.html', {"datos":datos})
         else:
             datos={'message': "Error, no tienes acceso a esta ventana"}
             return JsonResponse(datos)

@@ -11,6 +11,24 @@
     
 
     <p>Esta es una pagina diseñada de alumnos para alumnos, en ella se encontraran las noticias relevantes de Facultad de Ingenieria Mochis.</p>
+
+
+    {% for item in datos.publicaciones %}
+
+    <div class="Contenedor_noticias">
+
+        <div style="overflow:hidden;" >
+            <h2 class="titulo" style="float:left;">{{item.titulo}}</h2>
+
+            <h4 style="float:right;">{{item.fecha}}</h4>
+        </div>
+        <p>{{item.descripcion}}</p>
+
+        <center><img style="width: 25%;" src="{% static 'images/prueba_disney.jpg' %}" /></center>
+           
+    </div>
+
+    {% endfor %}
 </div>
 {% endblock %}
 
