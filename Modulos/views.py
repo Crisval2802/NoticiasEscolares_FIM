@@ -1,5 +1,5 @@
 import json
-
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http.response import JsonResponse
@@ -126,3 +126,22 @@ class Inicio_Lector(View):
         else:
             datos={'message': "Error, no tienes acceso a esta ventana"}
             return JsonResponse(datos)
+
+class Publicar(View):
+    @method_decorator(login_required)
+    def get(self, request):
+        return render(request, 'publicar.html')
+    
+    def post(self, request):
+        jd = json.loads(request.body)
+        id_usuario = usuario.objects.get(correo=request.user.email)
+        publicacion.objects.create(
+            titulo=jd['titulo'],
+            descripcion=jd['descripcion'],
+            fecha=jd['fecha'],
+            imagen=jd['imagen'],
+            id_categoria_id=jd['id_categoria_id'],
+            id_usuario=id_usuario  
+        )
+        datos = {'message': "Success"}
+        return JsonResponse(datos)

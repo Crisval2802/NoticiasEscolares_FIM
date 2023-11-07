@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import Inicio, Inicio_Escritor, Inicio_Lector, Login, Logout, Redirigir, Registro
+from .views import Inicio, Inicio_Escritor, Inicio_Lector, Login, Logout, Publicar, Redirigir, Registro
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 
 urlpatterns=[  
@@ -11,4 +11,5 @@ urlpatterns=[
    path('registro/', Registro.as_view(), name='registro'),
    path('inicio_lector/', Inicio_Lector.as_view(), name='inicio_lector'),
    path('inicio_escritor/', Inicio_Escritor.as_view(), name='inicio_escritor'),
+   path('publicar/', Publicar.as_view(), name='publicar'),
 ]
