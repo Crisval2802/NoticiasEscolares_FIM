@@ -94,11 +94,11 @@ class Inicio(View):
 
 class Inicio_Escritor(View):
     @method_decorator(login_required, name='dispatch')
-    def get(self,request):
+    def get(self,request, categoria=""):
         # Validacion de tipo de usuario
         aux_usuario = usuario.objects.get(correo=request.user.email)
         if aux_usuario.tipo=='E':
-            publicaciones = list(publicacion.objects.values())
+            publicaciones = list(publicacion.objects.values().order_by("-fecha"))
 
             datos={'publicaciones': publicaciones}
 
@@ -111,12 +111,18 @@ class Inicio_Escritor(View):
     
 class Inicio_Lector(View):
     @method_decorator(login_required, name='dispatch')
-    def get(self,request):
+    def get(self,request, categoria=""):
         # Validacion de tipo de usuario
         aux_usuario = usuario.objects.get(correo=request.user.email)
         if aux_usuario.tipo=='L':
 
-            publicaciones = list(publicacion.objects.values())
+            if categoria=="" or categoria=="General":
+                
+                publicaciones = list(publicacion.objects.values().order_by("-fecha"))
+
+            elif categoria =="Software":
+
+                publicaciones = list(publicacion.objects.filter(id_categoria_id=2).values().order_by("-fecha"))
 
             datos={'publicaciones': publicaciones}
 
