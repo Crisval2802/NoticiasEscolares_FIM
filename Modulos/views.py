@@ -9,7 +9,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth import authenticate, login, logout
 
 
-from .models import usuario, publicacion
+from .models import eventos, usuario, publicacion
 
 
 
@@ -148,6 +148,24 @@ class Publicar(View):
             imagen=jd['imagen'],
             id_categoria_id=jd['id_categoria_id'],
             id_usuario=id_usuario  
+        )
+        datos = {'message': "Success"}
+        return JsonResponse(datos)
+class Evento(View):
+    @method_decorator(login_required)
+    def get(self, request):
+        return render(request, 'evento.html')
+    def post(self, request):
+        jd = json.loads(request.body)
+        id_usuario = usuario.objects.get(correo=request.user.email)
+        eventos.objects.create(
+            titulo=jd['titulo'],
+            id_categoria_id=jd['id_categoria_id'],
+            descripcion=jd['descripcion'],
+            fecha_inicio=jd['fecha_inicio'],
+            fecha_final=jd['fecha_final'],
+            imagen=jd['imagen'],
+            id_usuario=id_usuario 
         )
         datos = {'message': "Success"}
         return JsonResponse(datos)
