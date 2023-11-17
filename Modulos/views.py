@@ -169,3 +169,7 @@ class Evento(View):
         )
         datos = {'message': "Success"}
         return JsonResponse(datos)
+    
+def calendar_view(request):
+    return render(request, 'templates/calendar.html')
+
