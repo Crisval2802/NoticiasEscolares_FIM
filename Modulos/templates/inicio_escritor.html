@@ -1,0 +1,51 @@
+{% extends 'layouts/nav_principal_escritor.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/principal.css' %}">
+
+<div class="nueva_publicacion">
+    <form action="{% url 'publicar' %}" method="get">
+        <button>Nueva Publicacion</button>
+    </form>
+</div>
+
+<div class="noticias">
+    
+
+
+    <h1>{{categoria}}</h1>
+
+    
+
+    <p>Esta es una pagina diseñada de alumnos para alumnos, en ella se encontraran las noticias relevantes de Facultad de Ingenieria Mochis.</p>
+
+
+    {% for item in entity %}
+
+    <div class="Contenedor_noticias">
+
+        <div style="overflow:hidden;" >
+            <h2 class="titulo" style="float:left;">{{item.titulo}}</h2>
+
+            <h4 style="float:right;">{{item.fecha}}</h4>
+        </div>
+        <p>{{item.descripcion}}</p>
+
+        {% if item.imagen %}
+        <center><img width="30%" src="{{item.imagen.url}}" /></center>
+
+        {% endif %}
+    </div>
+
+    
+    {% endfor %}
+
+    <div>
+        {% include 'layouts/paginator.html' %}
+    </div>
+</div>
+{% endblock %}
+
+
+

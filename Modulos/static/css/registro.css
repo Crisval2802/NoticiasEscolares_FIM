@@ -1,0 +1,60 @@
+.register-page {
+  width: 90%;
+  padding: 3% 0 0;
+  margin: 3%;
+  overflow: hidden;
+}
+
+
+.form {
+  background: #A7B0C9;
+  width: 30%;
+  min-height: 800px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 32px;
+}
+
+
+
+
+
+.form input {
+  font-family: "Roboto", sans-serif;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #396007;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  border-radius: 30px;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #3f4140;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #2e2e2e;
+  text-decoration: none;
+  font-size: 14px;
+}

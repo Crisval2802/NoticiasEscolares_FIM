@@ -1,0 +1,93 @@
+{% extends 'layouts/nav_principal_escritor.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/publicar.css' %}">
+<div class="login-page">
+    <div class="form" style="margin-top: 3%;">
+        <h1>Crear publicación</h1>
+        <div class="contenido">
+            <input type="text" id="titulo" placeholder="Añadir Titulo">
+            <textarea id="texto" rows="4" cols="50" placeholder="Escribe el texto aquí"></textarea>
+            <div class="input-file">
+                <input id="imagen" type="file" name="imagen" />
+                <label for="imagen">Seleccionar imagen</label>
+            </div>
+            <div class="categoria">
+                <select id="categoria">
+                    <option value=1>General</option>
+                    <option value=2>Ingeniería civil</option>
+                    <option value=3>Ingeniería de software</option>
+                    <option value=4>Ingeniería en geodesia</option>
+                    <option value=5>Ingeniería en procesos industriales</option>
+                    <option value=6>Becas</option>
+                </select>
+            </div>
+        </div>
+        <div class="botones">
+            <button id="publicar">Publicar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("publicar").addEventListener("click", function () {
+        var titulo = document.getElementById("titulo").value;
+        var texto = document.getElementById("texto").value;
+        var imagenInput = document.getElementById("imagen");
+        var categoria = document.getElementById("categoria").value;
+        var fecha = new Date().toISOString().slice(0, 10);
+        
+        var data = new FormData() 
+        data.append('titulo', titulo);
+     
+        data.append('descripcion', texto);
+
+        if (imagenInput.value!=null){
+            data.append('imagen', imagenInput.files[0]);  // Obtener el archivo del input
+        }
+ 
+        data.append('id_categoria_id', categoria);
+        data.append('fecha', fecha);
+
+
+        
+
+        fetch('http://127.0.0.1:8000/publicar/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            
+            body: data
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Se ha realizado la publicación');
+
+            window.location.href = '/inicio_escritor/General';
+        });
+    });
+
+    
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+
+});
+</script>
+
+{% endblock %}
