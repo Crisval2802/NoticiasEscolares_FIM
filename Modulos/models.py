@@ -26,6 +26,6 @@ class eventos(models.Model):
     descripcion = models.CharField(max_length=1000)
     fecha_inicio = models.DateField(default=timezone.now)
     fecha_final = models.DateField()
-    imagen = models.ImageField(upload_to='imagenes_evento')
+
     id_usuario = models.ForeignKey(usuario, null=False, on_delete=models.DO_NOTHING)
 

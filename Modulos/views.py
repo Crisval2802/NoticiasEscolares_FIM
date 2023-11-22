@@ -311,7 +311,7 @@ class Evento(View):
             descripcion=jd['descripcion'],
             fecha_inicio=jd['fecha_inicio'],
             fecha_final=jd['fecha_final'],
-            imagen=jd['imagen'],
+
             id_usuario=id_usuario 
         )
         datos = {'message': "Success"}
