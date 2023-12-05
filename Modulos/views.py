@@ -482,7 +482,6 @@ class Evento(View):
         )
         datos = {'message': "Success"}
         return JsonResponse(datos)
-<<<<<<< HEAD
     
 def calendario_view(request):
     return render(request, 'calendario.html')
@@ -530,27 +529,3 @@ class CambiarContra(View):
             return redirect('/cambiar_contra/error')
 
    
-=======
-class Evento(View):
-    @method_decorator(login_required)
-    def get(self, request):
-        return render(request, 'evento.html')
-    def post(self, request):
-        jd = json.loads(request.body)
-        id_usuario = usuario.objects.get(correo=request.user.email)
-        eventos.objects.create(
-            titulo=jd['titulo'],
-            id_categoria_id=jd['id_categoria_id'],
-            descripcion=jd['descripcion'],
-            fecha_inicio=jd['fecha_inicio'],
-            fecha_final=jd['fecha_final'],
-            imagen=jd['imagen'],
-            id_usuario=id_usuario 
-        )
-        datos = {'message': "Success"}
-        return JsonResponse(datos)
-    
-def calendar_view(request):
-    return render(request, 'templates/calendar.html')
-
->>>>>>> e749db43245e6fdc839b769da40edd05ea015731
