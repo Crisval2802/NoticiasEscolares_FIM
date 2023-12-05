@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 
 
@@ -16,14 +17,15 @@ class publicacion(models.Model):
     id_categoria = models.ForeignKey(categoria, null=False, on_delete=models.DO_NOTHING)
     descripcion = models.CharField(max_length=1000)
     fecha = models.DateField()
-    imagen = models.CharField(max_length=80)
+    imagen = models.ImageField(upload_to='imagenes_publicacion')
     id_usuario = models.ForeignKey(usuario, null=False, on_delete=models.DO_NOTHING)
 
 class eventos(models.Model):
     titulo= models.CharField(max_length=150)
     id_categoria = models.ForeignKey(categoria, null=False, on_delete=models.DO_NOTHING)
     descripcion = models.CharField(max_length=1000)
-    fecha = models.DateField()
-    imagen = models.CharField(max_length=80)
+    fecha_inicio = models.DateField(default=timezone.now)
+    fecha_final = models.DateField()
+
     id_usuario = models.ForeignKey(usuario, null=False, on_delete=models.DO_NOTHING)
 

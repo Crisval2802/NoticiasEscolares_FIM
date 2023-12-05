@@ -1,4 +1,4 @@
-{% extends 'layouts/nav_principal.html' %}
+{% extends 'layouts/nav_principal_escritor.html' %}
 {% load static %}
 {% block content %}
 
@@ -7,21 +7,24 @@
 <div class="nueva_publicacion">
     <form action="{% url 'publicar' %}" method="get">
         <button>Nueva Publicacion</button>
+        
     </form>
+
+
 </div>
 
 <div class="noticias">
     
 
 
-    <h1>General</h1>
+    <h1>{{categoria}}</h1>
 
     
 
     <p>Esta es una pagina diseñada de alumnos para alumnos, en ella se encontraran las noticias relevantes de Facultad de Ingenieria Mochis.</p>
 
 
-    {% for item in datos.publicaciones %}
+    {% for item in entity %}
 
     <div class="Contenedor_noticias">
 
@@ -32,12 +35,46 @@
         </div>
         <p>{{item.descripcion}}</p>
 
-        <center><img style="width: 25%;" src="{% static 'images/prueba_disney.jpg' %}" /></center>
-           
+        {% if item.imagen %}
+        <center><img width="30%" src="{{item.imagen.url}}" /></center>
+
+        {% endif %}
     </div>
 
+    
     {% endfor %}
+
+    <div style="margin-top: 5%">
+        {% include 'layouts/paginator.html' %}
+    </div>
 </div>
+
+
+
+<div class="slider">
+    <div class="slide-track" id="dynamic-slider">
+        {% for item in eventos %}
+            <div class="slide">
+                <h4>{{ item.titulo }}</h4>
+                <p>{{item.fecha_inicio}} - {{item.fecha_final}}</p>
+                <p>{{ item.descripcion }}</p>
+                
+            </div>
+        {% endfor %}
+        {% for item in eventos %}
+            <div class="slide">
+                <h4>{{ item.titulo }}</h4>
+                <p>{{item.fecha_inicio}} - {{item.fecha_final}}</p>
+                <p>{{ item.descripcion }}</p>
+                
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    document.documentElement.style.setProperty('--cantidad-eventos', '{{ cantidad }}');
+</script>
+
 {% endblock %}
 
 

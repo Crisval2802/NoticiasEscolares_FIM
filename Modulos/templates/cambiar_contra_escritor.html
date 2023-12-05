@@ -1,0 +1,82 @@
+{% extends 'layouts/nav_principal_escritor.html' %}
+{% load static %}
+
+
+
+
+
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/cambiar_contra.css' %}">
+<div class="register-page">
+
+
+
+    <center><div class="form">
+
+        <h1>Cambiar contraseña</h1>
+        <br>
+		<form class="register-form" method="post" action="/cambiar_contra/0">
+			
+            {% if datos %}
+            <div class="alert alert-danger" role="alert">
+                {{datos.mensaje}}
+            </div>
+            {% endif %}
+
+
+
+
+            
+			{% csrf_token %}
+			
+            <input type="password" name='contra_actual' placeholder="Contraseña Actual" required/>
+            <input type="password" id="nueva_contra" name='nueva_contra' placeholder="Nueva Contraseña"  onchange="validar_contras()" required/>
+            <input type="password" id="confirmar_nueva_contra" name='confirmar_nueva_contra' placeholder="Confirmar Nueva Contraseña" onchange="validar_contras()" required/>
+           
+			
+			<!-- Mensaje de error -->
+			<div hidden class="alert alert-danger" role="alert" id="error_contras">
+				Las contraseñas no coinciden
+			</div>
+
+			<br></br>
+
+            <button id="enviar">Enviar</button>
+		</form>
+
+
+
+
+    </div></center>
+
+
+
+</div>
+
+
+
+<script>
+
+
+	function validar_contras(){
+
+		contra = document.getElementById('nueva_contra').value;
+		confirmar_contra = document.getElementById('confirmar_nueva_contra').value;
+
+		if(contra!=confirmar_contra){
+		 	document.getElementById('error_contras').hidden=false;
+			var boton = document.getElementById('enviar');
+			boton.disabled=true;
+		}else{
+			document.getElementById('error_contras').hidden=true;
+			var boton = document.getElementById('enviar');
+			boton.disabled=false;
+
+		}
+	}
+
+</script>
+
+{% endblock %}

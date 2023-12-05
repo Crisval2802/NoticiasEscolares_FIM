@@ -1,10 +1,10 @@
-{% extends 'layouts/nav_principal.html' %}
+{% extends 'layouts/nav_principal_escritor.html' %}
 {% load static %}
 {% block content %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'css/publicar.css' %}">
 <div class="login-page">
-    <div class="form">
+    <div class="form" style="margin-top: 3%;">
         <h1>Crear publicación</h1>
         <div class="contenido">
             <input type="text" id="titulo" placeholder="Añadir Titulo">
@@ -35,31 +35,42 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("publicar").addEventListener("click", function () {
         var titulo = document.getElementById("titulo").value;
         var texto = document.getElementById("texto").value;
-        var imagen = document.getElementById("imagen").value;
+        var imagenInput = document.getElementById("imagen");
         var categoria = document.getElementById("categoria").value;
         var fecha = new Date().toISOString().slice(0, 10);
+        
+        var data = new FormData() 
+        data.append('titulo', titulo);
+     
+        data.append('descripcion', texto);
 
-        var data = {
-            titulo: titulo,
-            descripcion: texto,
-            imagen: imagen,
-            id_categoria_id: categoria,
-            fecha: fecha 
-        };
+        if (imagenInput.value!=null){
+            data.append('imagen', imagenInput.files[0]);  // Obtener el archivo del input
+        }
+ 
+        data.append('id_categoria_id', categoria);
+        data.append('fecha', fecha);
+
+
+        
 
         fetch('http://127.0.0.1:8000/publicar/', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
                 'X-CSRFToken': getCookie('csrftoken')
             },
-            body: JSON.stringify(data)
+            
+            body: data
         })
         .then(response => response.json())
         .then(data => {
             alert('Se ha realizado la publicación');
+
+            window.location.href = '/inicio_escritor/General';
         });
     });
+
+    
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -72,6 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
         }
+        
         return cookieValue;
     }
 

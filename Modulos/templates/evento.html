@@ -1,0 +1,97 @@
+{% extends 'layouts/nav_principal_escritor.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/evento.css' %}">
+<div class="login-page">
+    <div class="form">
+        <h1>Crear Evento</h1>
+        <div class="contenido">
+            <input type="text" id="titulo" placeholder="Añadir Titulo">
+            <div class="fechas">
+               <div class="fecha">
+                    <label>Fecha de inicio: </label> <input type="date" id="fecha_inicio" min="{{ fecha_actual }}"> 
+                </div>
+                <div class="fecha">
+                    <label>Fecha de finalización: </label> <input type="date" id="fecha_final"min="{{ fecha_actual }}"> 
+                </div> 
+            </div>
+            <textarea id="texto" rows="4" cols="50" placeholder="Escribe el texto aquí"></textarea>
+
+            <div class="categoria">
+                <select id="categoria">
+                    <option value=1>General</option>
+                    <option value=2>Ingeniería civil</option>
+                    <option value=3>Ingeniería de software</option>
+                    <option value=4>Ingeniería en geodesia</option>
+                    <option value=5>Ingeniería en procesos industriales</option>
+                    <option value=6>Becas</option>
+                </select>
+            </div>
+        </div>
+        <div class="botones">
+            <button id="publicar">Publicar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("fecha_inicio").valueAsDate = new Date();
+    document.getElementById("fecha_final").valueAsDate = new Date();
+    var fechaActual = new Date().toISOString().slice(0, 10);
+    document.getElementById("fecha_inicio").min = fechaActual;
+    document.getElementById("fecha_final").min = fechaActual;
+
+    document.getElementById("publicar").addEventListener("click", function () {
+        var titulo = document.getElementById("titulo").value;
+        var texto = document.getElementById("texto").value;
+
+        var categoria = document.getElementById("categoria").value;
+        var fecha_inicio = document.getElementById("fecha_inicio").value;
+        var fecha_final = document.getElementById("fecha_final").value;
+        console.log(fecha_final);
+        
+
+        var data = {
+            titulo: titulo,
+            descripcion: texto,
+
+            id_categoria_id: categoria,
+            fecha_inicio: fecha_inicio,
+            fecha_final: fecha_final
+        };
+
+        fetch('http://127.0.0.1:8000/evento/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Se ha realizado la publicación del evento');
+        });
+    });
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+
+});
+</script>
+
+{% endblock %}

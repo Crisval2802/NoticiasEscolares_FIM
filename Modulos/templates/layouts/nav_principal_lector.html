@@ -26,22 +26,24 @@
                     
                     <li><a> CATEGORIAS</a>
                         <ul class="dropdown">
-                            <li><a href="#">General</a></li>
-                            <li><a href="#">Ing. Civil</a></li>
-                            <li><a href="#">Ing. Software</a></li>
-                            <li><a href="#">Ing. Geodesia</a></li>
-                            <li><a href="#">Ing. Procesos Industriales </a></li>
+                            <li><a href="/inicio_lector/General">General</a></li>
+                            <li><a href="/inicio_lector/Civil">Ing. Civil</a></li>
+                            <li><a href="/inicio_lector/Software">Ing. Software</a></li>
+                            <li><a href="/inicio_lector/Geodesia">Ing. Geodesia</a></li>
+                            <li><a href="/inicio_lector/Procesos">Ing. Procesos Industriales </a></li>
+                            <li><a href="/inicio_lector/Becas">Becas </a></li>
                         </ul>
                     </li>
                    
                 </div>
-                <div style="left: 855px; top: 36px; position: absolute; color: white; font-size: 20px; font-family: Inter; font-weight: 700; word-wrap: break-word">CALENDARIO</div>
-
+                <a href="{% url 'calendario_lector' %}">
+                <div style="left: 855px; top: 36px; position: absolute; color: white; font-size: 20px; font-family: Inter; font-weight: 700; word-wrap: break-word">CALENDARIO </div>
+                </a>
                 <div style="left: 1355px; top: 10px; position: absolute">
                     <li><img style="width: 72px; height: 77px;" src="{% static 'images/usuario.png' %}" />
                         <ul class="dropdown" style="width: 350%;">
                             <li><a style="color:#EFB810;">Perfil</a>
-                            <li><a href="#">Cambiar contraseña</a></li>
+                            <li><a href="/cambiar_contra/0">Cambiar contraseña</a></li>
                             <li><a style="color: #790000;" href="{% url 'logout' %}" >Cerrar sesion</a></li>
                         </ul>
 
