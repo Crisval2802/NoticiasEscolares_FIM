@@ -1,27 +1,94 @@
-{% extends 'layouts/nav_principal_escritor.html' %}
+{% extends 'layouts/nav_principal_lector.html' %}
 {% load static %}
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'fullcalendar/lib/main.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/principal.css' %}">
+
+
+
 <div class="card">
     <div class="card-header">
         <div class="row">
             <div class="col-md-8">
                     <h2><strong class="card-title">Calendario</strong></h2>
+
+                    
             </div>
         </div>
     </div>
+    <br>
+
     <div id="calendar" class="card" style="padding: 150px;"></div>
 </div>
 
-<script src="{% static 'fullcalendar/lib/main.js' %}"></script>
+<dialog id="alert_dialog_evento">
+    <form>
+
+        <p>Datos de el evento</p>
+
+        <br>
+
+        <h1 id="titulo"></h1>
+        <br>
+
+        <p id="descripcion"></p>
+        <br>
+
+        <p>Fecha de inicio</p>
+        <input id="Fecha_Inicio" value="" disabled style="width:650px;"/>
+
+        <br>
+
+        <p>Fecha final</p>
+        <input id="Fecha_Final" value="" disabled style="width:650px;"/>
+        <br>
+
+
+    </form>
+    <br>
+    <br>
+    
+    <button onClick="this.parentElement.close()" type="button">Cerrar</button>
+
+</dialog>
+
+<script src="{% static 'fullcalendar/dist/index.global.js' %}"></script>
+<script src="{% static 'fullcalendar/dist/locales/es.js' %}"></script>
+{{ datos|json_script:"eventos" }}
 <script>
+    // Accede al JSON desde el contexto de Django
+    var eventos = JSON.parse(document.getElementById('eventos').textContent);
+    
+
+
     document.addEventListener('DOMContentLoaded', function(){
         var calendarUI = document.getElementById('calendar');
+        
+        
+   
         var calendar = new FullCalendar.Calendar(calendarUI,{
+            
+            events: eventos,
+            eventClick: function(info) {
 
 
+                    var titulo = document.getElementById('titulo');
+                    titulo.textContent = info.event.title;
+
+                    var desc = document.getElementById('descripcion');
+                    desc.textContent = info.event.groupId;
+
+                    var fecha = document.getElementById('Fecha_Inicio');
+                    fecha.value=info.event.start;
+                    var fecha = document.getElementById('Fecha_Final');
+                    fecha.value=info.event.end;
+                    const alertDialog = document.querySelector("#alert_dialog_evento");
+                    alertDialog.showModal();
+                    
+                } ,
+            locale: 'es'   
+            
         });
         calendar.render();
     });

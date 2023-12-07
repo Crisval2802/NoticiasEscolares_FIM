@@ -464,10 +464,18 @@ class Publicar(View):
 
         datos = {'message': "Success"}
         return JsonResponse(datos)
+    
+
 class Evento(View):
     @method_decorator(login_required)
     def get(self, request):
-        return render(request, 'evento.html')
+        aux_usuario = usuario.objects.get(correo=request.user.email)
+        if aux_usuario.tipo=='E':
+            return render(request, 'evento.html') 
+        else:
+            return redirect('/inicio_lector/General')  
+        
+    @method_decorator(login_required)
     def post(self, request):
         jd = json.loads(request.body)
         id_usuario = usuario.objects.get(correo=request.user.email)
@@ -483,11 +491,60 @@ class Evento(View):
         datos = {'message': "Success"}
         return JsonResponse(datos)
     
-def calendario_view(request):
-    return render(request, 'calendario.html')
 
-def calendario_lector_view(request):
-    return render(request, 'calendario_lector.html')
+class Calendario_Escritor(View):
+
+    @method_decorator(login_required, name='dispatch')
+    def get(self, request):
+        aux_usuario = usuario.objects.get(correo=request.user.email)
+        if aux_usuario.tipo=='E':
+            all_events = eventos.objects.all()                                                                                    
+            datos = []  
+            contador=1                                                                                                    
+            for event in all_events:                                                                                             
+                datos.append({                                                                                                     
+                    'id': event.id,  
+                    'title': event.titulo,       
+                    'groupId': event.descripcion,                                                                                                                                                             
+                    'start': event.fecha_inicio,                                                         
+                    'end': event.fecha_final,   
+                    'allDay': True,
+                    'editable': False,
+                    'className': "badge-soft-warning",                                                        
+                }) 
+
+                contador+=1
+            return render(request, 'calendario.html', {'datos':datos}) 
+        else:
+            return redirect('/inicio_lector/General') 
+        
+
+class Calendario_Lector(View):
+    
+    @method_decorator(login_required, name='dispatch')
+    def get(self, request):
+        aux_usuario = usuario.objects.get(correo=request.user.email)
+        if aux_usuario.tipo=='L':
+            all_events = eventos.objects.all()                                                                                    
+            datos = []  
+            contador=1                                                                                                    
+            for event in all_events:                                                                                             
+                datos.append({                                                                                                     
+                    'id': event.id,  
+                    'title': event.titulo,       
+                    'groupId': event.descripcion,                                                                                                                                                             
+                    'start': event.fecha_inicio,                                                         
+                    'end': event.fecha_final,   
+                    'allDay': True,
+                    'editable': False,
+                    'className': "badge-soft-warning",                                                        
+                }) 
+
+                contador+=1
+            return render(request, 'calendario_lector.html', {'datos':datos}) 
+        else:
+            return redirect('/inicio_escritor/General')
+
 
 
 class CambiarContra(View):    
