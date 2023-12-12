@@ -73,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             alert('Se ha realizado la publicación del evento');
+            window.location.href = '/calendario/';
         });
     });
     function getCookie(name) {

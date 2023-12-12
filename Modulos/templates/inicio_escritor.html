@@ -13,6 +13,7 @@
 
 </div>
 
+
 <div class="noticias">
     
 
@@ -36,7 +37,7 @@
         <p>{{item.descripcion}}</p>
 
         {% if item.imagen %}
-        <center><img width="30%" src="{{item.imagen.url}}" /></center>
+        <center><img width="50%" src="{{item.imagen.url}}" /></center>
 
         {% endif %}
     </div>
@@ -53,6 +54,7 @@
 
 <div class="slider">
     <div class="slide-track" id="dynamic-slider">
+        <h1>Eventos del mes</h1>
         {% for item in eventos %}
             <div class="slide">
                 <h4>{{ item.titulo }}</h4>
@@ -71,6 +73,10 @@
         {% endfor %}
     </div>
 </div>
+
+
+
+
 <script>
     document.documentElement.style.setProperty('--cantidad-eventos', '{{ cantidad }}');
 </script>

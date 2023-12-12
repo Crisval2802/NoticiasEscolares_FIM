@@ -1,14 +1,10 @@
-
-
 .noticias {
-  display: inline-block;
-    width: 63%;
+    width: 90%;
     padding: 1%;
     margin: 3%;
-
+    overflow: hidden;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 30px;
-
   }
 
   .nueva_publicacion {
@@ -71,7 +67,6 @@
   --cantidad-eventos: 0; /* Valor predeterminado */
 }
 .slider {
-  display: inline-block;
   height: 400px; 
   width: 25%;
   padding: 1%;
@@ -79,17 +74,14 @@
   overflow: hidden;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   border-radius: 30px;
-  float: right;
-  position:fixed;
 }
 
 .slider .slide-track {
-  display: inline-block;
+  display: flex;
   flex-direction: column; 
   animation: scroll 40s linear infinite;
   -webkit-animation: scroll 40s linear infinite;
   height: calc(200px * var(--cantidad-eventos * 2)); 
-
 }
 
 .slider .slide {

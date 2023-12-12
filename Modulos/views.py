@@ -110,7 +110,7 @@ class Inicio_Escritor(View):
             
             if categoria =="Software":
 
-                publicaciones = publicacion.objects.filter(id_categoria_id=2).order_by("-id")
+                publicaciones = publicacion.objects.filter(id_categoria_id=3).order_by("-id")
 
                 page = request.GET.get('page', 1)
                 try:
@@ -136,7 +136,7 @@ class Inicio_Escritor(View):
             
             if categoria =="Civil":
 
-                publicaciones = publicacion.objects.filter(id_categoria_id=3).order_by("-id")
+                publicaciones = publicacion.objects.filter(id_categoria_id=2).order_by("-id")
 
                 page = request.GET.get('page', 1)
                 try:
@@ -277,7 +277,7 @@ class Inicio_Lector(View):
 
             if categoria =="Software":
 
-                publicaciones = publicacion.objects.filter(id_categoria_id=2).order_by("-id")
+                publicaciones = publicacion.objects.filter(id_categoria_id=3).order_by("-id")
 
                 page = request.GET.get('page', 1)
                 try:
@@ -304,7 +304,7 @@ class Inicio_Lector(View):
             
             if categoria =="Civil":
 
-                publicaciones = publicacion.objects.filter(id_categoria_id=3).order_by("-id")
+                publicaciones = publicacion.objects.filter(id_categoria_id=2).order_by("-id")
 
                 page = request.GET.get('page', 1)
                 try:
@@ -462,7 +462,7 @@ class Publicar(View):
             ultima_publicacion.imagen.save('imagen_publicacion_'+ str(ultima_publicacion.id) + '.jpg',  ContentFile(image), save=False) # se guarda la nueva foto
             ultima_publicacion.save()
 
-        datos = {'message': "Success"}
+        datos = {'message': request.POST.get('id_categoria_id')}
         return JsonResponse(datos)
     
 
